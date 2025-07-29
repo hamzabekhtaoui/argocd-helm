@@ -1,0 +1,4 @@
+environment: dev
+
+secret:
+  token: "ZW1vaXIoemhremVyenVoaGZzYQo="

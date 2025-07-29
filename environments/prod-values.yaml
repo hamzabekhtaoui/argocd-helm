@@ -1,0 +1,4 @@
+environment: prod
+
+secret:
+  token: "YWl6ZXJ6anJreXplcnJ1b25mYwo="

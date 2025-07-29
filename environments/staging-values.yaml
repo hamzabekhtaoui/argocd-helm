@@ -1,0 +1,4 @@
+environment: stagging
+
+secret:
+  token: "a2RlZnJ6b3lmYm56c2RqZXJmego="
