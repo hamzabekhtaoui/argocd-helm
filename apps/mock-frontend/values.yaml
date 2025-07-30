@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 appName: mock-frontend
-
+message: "Interesting learning curve, keep going Hamza!"
 image:
-  repository: benmalekarim/mock-frontend
+  repository: ghcr.io/hamzabekhtaoui/mock-app-image-updater
+  tag: v1.0.0-develop
