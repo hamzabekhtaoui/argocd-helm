@@ -1,0 +1,4 @@
+appName: mock-authentication
+
+image:
+  repository: benmalekarim/mock-authentication
