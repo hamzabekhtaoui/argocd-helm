@@ -1,22 +1,81 @@
-# argo-apps/myapp.yaml
+---
+# Source: global-argocd-app/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myapp
+  name: authentication-stagging
   namespace: argocd
 spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: stagging-namespace
   project: default
   source:
-    repoURL: https://github.com/hamzabekhtaoui/argocd-helm.git
-    targetRevision: main
-    path: apps/mock-frontend
+    repoURL: 'https://github.com/hamzabekhtaoui/argocd-helm/'
+    path: 'apps/mock-authentication'
+    targetRevision: 'main'
     helm:
+      releaseName: authentication-stagging
       valueFiles:
-        - values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+        - '/environments/stagging-values.yaml'
+        - '/apps/mock-authentication/environments/stagging-values.yaml'
   syncPolicy:
     automated:
-      selfHeal: true
       prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: global-argocd-app/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frontend-stagging
+  namespace: argocd
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: stagging-namespace
+  project: default
+  source:
+    repoURL: 'https://github.com/hamzabekhtaoui/argocd-helm/'
+    path: 'apps/mock-frontend'
+    targetRevision: 'main'
+    helm:
+      releaseName: mock-frontend-stagging
+      valueFiles:
+        - '/environments/stagging-values.yaml'
+        - '/apps/mock-frontend/environments/stagging-values.yaml'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: global-argocd-app/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: payment-stagging
+  namespace: argocd
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: stagging-namespace
+  project: default
+  source:
+    repoURL: 'https://github.com/hamzabekhtaoui/argocd-helm/'
+    path: 'apps/mock-payment'
+    targetRevision: 'main'
+    helm:
+      releaseName: payment-stagging
+      valueFiles:
+        - '/environments/stagging-values.yaml'
+        - '/apps/mock-payment/environments/stagging-values.yaml'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
